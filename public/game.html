@@ -33,7 +33,7 @@
   body[data-game="hub"]{--acc:#39e6d4;--acc2:#ff5d73;--accdk:#1a8f80;--neon:#39e6d4;--bg:#0a0713;--panel:#1a1330;--panel2:#221844;}
 
   *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;touch-action:manipulation;}
-  html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);}
+  html,body{width:100%;height:100%;/* allow document scrolling so long end screens can be scrolled */overflow:auto;background:var(--bg);overscroll-behavior:contain;}
   @supports (height:100dvh){
     html,body{height:100dvh;}
     .screen{height:100dvh;}          /* with top:0 set, this wins over bottom:0 */
@@ -57,7 +57,8 @@
 
   .screen{position:fixed;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;
     z-index:2;padding:max(env(safe-area-inset-top),2vmin) max(env(safe-area-inset-right),2vmin) max(env(safe-area-inset-bottom),2vmin) max(env(safe-area-inset-left),2vmin);
-    overflow:hidden;}
+    /* Allow each screen to scroll when content overflows; smooth touch scrolling on mobile */
+    overflow:auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain;}
   .screen.on{display:flex;}
   #hub.on,#land.on{overflow:hidden;justify-content:center;}
   /* The landing must fit one screen at ANY aspect ratio, so its scale unit is tied
