@@ -1823,8 +1823,8 @@ const ARCADE=(function(){
  }
 
  /* SOC */
- function socSurge(){SPAWN_MS=2100;ALERT_TTL=10000;clearInterval(spawnId);spawnId=setInterval(spawn,SPAWN_MS);showEvent('🔥 ALERT SURGE!','#e2354f','#fff');SFX.surge();buzz(80);setTimeout(hideEvent,2500);}
- function spawn(){if(!running||game!=='soc'||live.length>=4)return;const a=Object.assign({id:++uid,born:Date.now()},genAlert());live.push(a);SFX.newalert();
+ function socSurge(){SPAWN_MS=2100;ALERT_TTL=15000;clearInterval(spawnId);spawnId=setInterval(spawn,SPAWN_MS);showEvent('🔥 ALERT SURGE!','#e2354f','#fff');SFX.surge();buzz(80);setTimeout(hideEvent,2500);}
+ function spawn(){if(!running||game!=='soc'||live.length>=2)return;const a=Object.assign({id:++uid,born:Date.now()},genAlert());live.push(a);SFX.newalert();
    const el=document.createElement('div');el.className='alert';el.id='a'+a.id;
    el.style.borderLeftColor=a.sev==='CRITICAL'?'#e2354f':a.sev==='HIGH'?'#f97316':a.sev==='MEDIUM'?'#ffd23f':'#38bdf8';
    el.innerHTML='<div class="top"><span class="sev '+a.sev+'">'+a.sev+'</span><span class="src">'+a.src+'</span></div><h4>'+a.t+'</h4><p>'+a.d+'</p>'+
