@@ -353,6 +353,10 @@
   .node .pwned{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(255,93,115,.14);opacity:0;}
   .node .pwned span{font-size:calc(var(--u)*1.05);font-weight:800;letter-spacing:.14em;color:#ff8098;border:.18em solid #ff8098;border-radius:.4em;padding:.2em .6em;transform:rotate(-10deg);}
   .node.reveal-bad .pwned{opacity:1;animation:stampin2 .2s cubic-bezier(.2,2,.4,1);}
+  /* correct/vulnerable pick highlight: green */
+  .node.reveal-good{border-color:rgba(62,230,122,.9);box-shadow:0 0 0 .14em rgba(62,230,122,.35),0 .3em 0 rgba(0,0,0,.3),0 0 1.2em rgba(62,230,122,.25);} 
+  .node.reveal-good .pwned{opacity:1;animation:stampin2 .2s cubic-bezier(.2,2,.4,1);background:rgba(62,230,122,.12);} 
+  .node.reveal-good .pwned span{color:#7ff0a8;border:.18em solid #7ff0a8;} 
   @keyframes stampin2{from{transform:scale(2);opacity:0;}to{transform:scale(1);opacity:1;}}
 
   /* toasts / popups / event banner */
@@ -1870,7 +1874,10 @@ const ARCADE=(function(){
    [...$('net').children].forEach((e,j)=>{if(curNodes[j].bad)e.classList.add('reveal-bad');else e.classList.add('dim');});
    const right=n.bad;
    history.push({q:curScenarioQ,detail:'You picked: '+n.name+' — '+n.desc,your:n.name,correct:curBad.name+' — '+curBad.desc,status:right?'right':'wrong',reason:curBad.clue,act:curBad.act});
-   if(right){correct++;owned++;streak++;bestStreak=Math.max(bestStreak,streak);const speed=Math.max(0,Math.round(80*(1-(Date.now()-roundStart)/9000)));const pts=(120*mult())+speed;score+=pts;toast('good','Owned it! +'+pts+(speed>40?' ⚡fast!':''));popPts('+'+pts,'#b98cff');streak>=6?SFX.great():SFX.pwn();buzz(20);}
+  if(right){correct++;owned++;streak++;bestStreak=Math.max(bestStreak,streak);const speed=Math.max(0,Math.round(80*(1-(Date.now()-roundStart)/9000)));const pts=(120*mult())+speed;score+=pts;toast('good','Owned it! +'+pts+(speed>40?' ⚡fast!':''));popPts('+'+pts,'#b98cff');streak>=6?SFX.great():SFX.pwn();buzz(20);
+      // visually mark the chosen node as a successful (green) reveal
+      try{el.classList.remove('dim');el.classList.remove('reveal-bad');el.classList.add('reveal-good');}catch(e){}
+    }
    else{wrong++;streak=0;score=Math.max(0,score-40);el.classList.remove('dim');el.classList.add('picked-wrong');toast('bad','−40 · '+curBad.name+' — '+curBad.clue);popPts('−40','#ff5d73');SFX.bad();buzz([60,40,60]);}
    hud();setTimeout(()=>{if(running)nextRound();},right?900:2400);}
 
