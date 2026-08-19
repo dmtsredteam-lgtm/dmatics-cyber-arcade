@@ -370,8 +370,8 @@
 
   /* ---------------- END ---------------- */
   .endwrap{display:flex;flex-direction:column;align-items:center;gap:calc(var(--u)*.7);text-align:center;max-width:40em;}
-  #end.on{overflow:auto;-webkit-overflow-scrolling:touch;align-items:flex-end;justify-content:center;} 
-  .endwrap{max-height:calc(100vh - (env(safe-area-inset-top, 0px) + 12vmin));overflow:auto;-webkit-overflow-scrolling:touch;margin-left:auto;}
+  #end.on{overflow:auto;-webkit-overflow-scrolling:touch;} 
+  .endwrap{max-height:calc(100vh - (env(safe-area-inset-top, 0px) + 12vmin));overflow:visible;-webkit-overflow-scrolling:touch;margin:0 auto;}
   .rank{font-size:calc(var(--u)*1.9);font-weight:800;color:var(--amber);transform:rotate(-1deg);}
   .finalscore{font-size:min(24vw,calc(var(--u)*6.2));font-weight:800;line-height:1;color:var(--ink);text-shadow:0 0 .5em color-mix(in srgb,var(--acc) 40%,transparent);}
   .fslabel{font-size:calc(var(--u)*.8);letter-spacing:.24em;color:var(--sub);font-weight:800;}
